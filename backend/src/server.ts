@@ -8,14 +8,24 @@ import { doubtsService } from './services/doubtsService';
 
 const app = express();
 const httpServer = createServer(app);
+
+const allowedOrigins = [
+  'http://localhost:3000',
+  /\.vercel\.app$/,
+];
+
 const io = new Server(httpServer, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin: allowedOrigins,
     methods: ['GET', 'POST', 'PATCH'],
+    credentials: true,
   },
 });
 
-app.use(cors());
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true,
+}));
 app.use(express.json());
 
 app.use('/api/doubts', createDoubtsRouter(io));
