@@ -11,6 +11,7 @@ const httpServer = createServer(app);
 
 const allowedOrigins = [
   'http://localhost:3000',
+  'https://real-time-doubt-board-edzy-frontend.vercel.app',
   /\.vercel\.app$/,
 ];
 
@@ -19,12 +20,14 @@ const io = new Server(httpServer, {
     origin: allowedOrigins,
     methods: ['GET', 'POST', 'PATCH'],
     credentials: true,
+    allowedHeaders: ['Content-Type'],
   },
 });
 
 app.use(cors({
   origin: allowedOrigins,
   credentials: true,
+  allowedHeaders: ['Content-Type'],
 }));
 app.use(express.json());
 
