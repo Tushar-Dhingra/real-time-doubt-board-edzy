@@ -1,0 +1,46 @@
+meta {
+  name: Test Realtime Connection
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{BASE_URL}}/socket.io/?EIO=4&transport=polling
+  body: none
+  auth: none
+}
+
+docs {
+  # Test Real-time Connection
+  
+  This request tests the Socket.io connection endpoint.
+  A successful response indicates the Socket.io server is running.
+  
+  For full WebSocket testing, use a WebSocket client or the frontend application.
+  
+  ## Manual WebSocket Test
+  
+  You can test WebSocket events using the browser console:
+  
+  ```javascript
+  const socket = io('http://localhost:4000');
+  
+  socket.on('connect', () => {
+    console.log('Connected:', socket.id);
+  });
+  
+  socket.on('user:count', (count) => {
+    console.log('Active users:', count);
+  });
+  
+  socket.on('doubt:created', (doubt) => {
+    console.log('New doubt:', doubt);
+  });
+  ```
+}
+
+tests {
+  test("Socket.io endpoint is accessible", function() {
+    expect(res.status).to.be.oneOf([200, 400]);
+  });
+}

@@ -1,0 +1,25 @@
+meta {
+  name: Resolve Doubt
+  type: http
+  seq: 4
+}
+
+patch {
+  url: {{BASE_URL}}/api/doubts/:id/resolve
+  body: none
+  auth: none
+}
+
+params:path {
+  id: REPLACE_WITH_DOUBT_ID
+}
+
+tests {
+  test("Status code is 200", function() {
+    expect(res.status).to.equal(200);
+  });
+  
+  test("Doubt is resolved", function() {
+    expect(res.body.resolved).to.equal(true);
+  });
+}

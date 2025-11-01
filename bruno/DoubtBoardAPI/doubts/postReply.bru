@@ -1,0 +1,33 @@
+meta {
+  name: Post Reply
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{BASE_URL}}/api/doubts/:id/reply
+  body: json
+  auth: none
+}
+
+params:path {
+  id: REPLACE_WITH_DOUBT_ID
+}
+
+body:json {
+  {
+    "message": "The quadratic formula is x = (-b ± √(b²-4ac)) / 2a. Use it when you can't factor easily.",
+    "repliedBy": "Teacher"
+  }
+}
+
+tests {
+  test("Status code is 200", function() {
+    expect(res.status).to.equal(200);
+  });
+  
+  test("Response has replies", function() {
+    expect(res.body.replies).to.be.an('array');
+    expect(res.body.replies.length).to.be.greaterThan(0);
+  });
+}
