@@ -7,7 +7,18 @@ export const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  timeout: 30000,
 });
+
+api.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    if (error.code === 'ECONNABORTED' || error.response?.status === 504) {
+      return Promise.reject(new Error('Server is waking up, please try again'));
+    }
+    return Promise.reject(error);
+  }
+);
 
 export interface Reply {
   id: string;

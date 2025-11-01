@@ -21,6 +21,7 @@ export const useDoubts = () => {
     onError: () => {
       toast.error('Failed to post doubt');
     },
+    retry: 2,
   });
 
   const addReply = useMutation({
@@ -32,6 +33,7 @@ export const useDoubts = () => {
     onError: () => {
       toast.error('Failed to add reply');
     },
+    retry: 2,
   });
 
   const resolveDoubt = useMutation({
@@ -42,6 +44,7 @@ export const useDoubts = () => {
     onError: () => {
       toast.error('Failed to resolve doubt');
     },
+    retry: 2,
   });
 
   const updateDoubtInCache = (doubt: Doubt) => {
