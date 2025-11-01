@@ -15,36 +15,27 @@ export const useDoubts = () => {
 
   const createDoubt = useMutation({
     mutationFn: doubtsApi.create,
-    onSuccess: () => {
-      toast.success('Doubt posted successfully!');
-    },
     onError: () => {
       toast.error('Failed to post doubt');
     },
-    retry: 2,
+    retry: false,
   });
 
   const addReply = useMutation({
     mutationFn: ({ id, data }: { id: string; data: { message: string; repliedBy: string } }) =>
       doubtsApi.addReply(id, data),
-    onSuccess: () => {
-      toast.success('Reply added!');
-    },
     onError: () => {
       toast.error('Failed to add reply');
     },
-    retry: 2,
+    retry: false,
   });
 
   const resolveDoubt = useMutation({
     mutationFn: doubtsApi.resolve,
-    onSuccess: () => {
-      toast.success('Doubt resolved!');
-    },
     onError: () => {
       toast.error('Failed to resolve doubt');
     },
-    retry: 2,
+    retry: false,
   });
 
   const updateDoubtInCache = (doubt: Doubt) => {
