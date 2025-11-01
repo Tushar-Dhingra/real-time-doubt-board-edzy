@@ -15,32 +15,17 @@ export const useDoubts = () => {
 
   const createDoubt = useMutation({
     mutationFn: doubtsApi.create,
-    onError: (error: any) => {
-      if (error.response?.status >= 400 && error.response?.status < 500) {
-        toast.error(error.response?.data?.error || 'Failed to post doubt');
-      }
-    },
     retry: false,
   });
 
   const addReply = useMutation({
     mutationFn: ({ id, data }: { id: string; data: { message: string; repliedBy: string } }) =>
       doubtsApi.addReply(id, data),
-    onError: (error: any) => {
-      if (error.response?.status >= 400 && error.response?.status < 500) {
-        toast.error(error.response?.data?.error || 'Failed to add reply');
-      }
-    },
     retry: false,
   });
 
   const resolveDoubt = useMutation({
     mutationFn: doubtsApi.resolve,
-    onError: (error: any) => {
-      if (error.response?.status >= 400 && error.response?.status < 500) {
-        toast.error(error.response?.data?.error || 'Failed to resolve doubt');
-      }
-    },
     retry: false,
   });
 
